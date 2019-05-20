@@ -7,11 +7,11 @@
 <ul>
     <li th:each="prijs:${prijzen}">
         <a th:href="@{/pizzas/prijzen/{prijs}(prijs=${prijs})}"
-           th:text="${prijs}"></a>
+           th:text="|${prijs} &euro;|"></a>
     </li>
 </ul>
 <h2 th:if="${prijs} != null">Pizzas met een prijs van
-    <span th:text="${prijs}"></span></h2>
+    <span th:text="${prijs}"></span> &euro;</h2>
 <ul th:if="${pizzas} != null">
     <li th:each="pizza:${pizzas}" th:text="${pizza.naam}"></li>
 </ul>

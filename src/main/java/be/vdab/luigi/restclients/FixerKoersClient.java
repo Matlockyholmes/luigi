@@ -18,25 +18,20 @@ public class FixerKoersClient implements KoersClient {
 
     public FixerKoersClient() {
         try{
-            url = new URL("http://data.fixer.io/api/latest?access_key=b2b79c3063c0422bf187b752992c0116");
+            url = new URL("http://data.fixer.io/api/latest?access_key=b2b79c3063c0422bf187b752992c0116&symbols=USD");
         } catch (MalformedURLException ex){
             String fout = "Fixer URL is verkeerd";
             throw new KoersClientException(fout);
         }
     }
 
-    public static void main(String[] args) {
-        FixerKoersClient fixerKoersClient = new FixerKoersClient();
-      fixerKoersClient.getDollarKoers();
-    }
     @Override
     public BigDecimal getDollarKoers() {
         try (Scanner scanner = new Scanner(url.openStream())){
             String lijn = scanner.nextLine();
             int beginPositieKoers = lijn.indexOf("USD") + 5;
-            int kommaPositie = lijn.indexOf(',',beginPositieKoers);
-            System.out.println(beginPositieKoers + " " + kommaPositie);
-            return new BigDecimal(lijn.substring(beginPositieKoers, kommaPositie));
+            int accoladePositie = lijn.indexOf('}',beginPositieKoers);
+            return new BigDecimal(lijn.substring(beginPositieKoers, accoladePositie));
         } catch (IOException | NumberFormatException ex){
             String fout = "kan koers niet lezen via Fixer";
             logger.error(fout, ex);
