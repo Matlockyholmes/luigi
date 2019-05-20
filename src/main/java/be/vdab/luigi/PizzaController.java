@@ -1,6 +1,7 @@
-package be.vdab.luigi.controllers;
+package be.vdab.luigi;
 
 import be.vdab.luigi.domain.Pizza;
+import be.vdab.luigi.services.EuroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,12 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("pizzas")
 public class PizzaController {
+    private final EuroService euroService;
+
+    public PizzaController(EuroService euroService) {
+        this.euroService = euroService;
+    }
+
     private final Pizza[] pizzas = {
             new Pizza(1, "Prosciutto", BigDecimal.valueOf(4), true),
             new Pizza(2, "Margherita",BigDecimal.valueOf(5), false),
@@ -27,7 +34,8 @@ public class PizzaController {
     public ModelAndView pizza(@PathVariable long id) {
         ModelAndView modelAndView = new ModelAndView("pizza");
         Arrays.stream(pizzas).filter(pizza -> pizza.getId() == id).findFirst()
-                .ifPresent(pizza -> modelAndView.addObject("pizza", pizza));
+                .ifPresent(pizza -> modelAndView.addObject("pizza", pizza)
+                        .addObject("inDollar", euroService.naarDollar(pizza.getPrijs())));
         return modelAndView;
     }
     private List<BigDecimal> uniekePrijzen(){

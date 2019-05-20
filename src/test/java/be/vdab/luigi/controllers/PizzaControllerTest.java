@@ -2,17 +2,23 @@ package be.vdab.luigi.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import be.vdab.luigi.PizzaController;
 import be.vdab.luigi.domain.Pizza;
+import be.vdab.luigi.services.EuroService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
-
+@RunWith(MockitoJUnitRunner.class)
 public class PizzaControllerTest {
+    @Mock
+    private EuroService euroService;
     private PizzaController controller;
     @Before
     public void before(){
-        controller = new PizzaController();
+        controller = new PizzaController(euroService);
     }
     @Test
     public void pizzasGebruiktDeThymeleafPaginaPizzas(){
