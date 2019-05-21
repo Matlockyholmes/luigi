@@ -3,6 +3,7 @@ package be.vdab.luigi.restclients;
 import be.vdab.luigi.exception.KoersClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +19,8 @@ public class FixerKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final URL url;
 
-    public FixerKoersClient() {
-        try{
-            url = new URL("http://data.fixer.io/api/latest?access_key=b2b79c3063c0422bf187b752992c0116&symbols=USD");
-        } catch (MalformedURLException ex){
-            String fout = "Fixer URL is verkeerd";
-            throw new KoersClientException(fout);
-        }
+    FixerKoersClient(@Value("${fixerKoersURL}") URL url) {
+        this.url = url;
     }
 
     @Override

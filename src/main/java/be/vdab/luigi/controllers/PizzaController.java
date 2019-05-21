@@ -1,7 +1,11 @@
 package be.vdab.luigi.controllers;
 
 import be.vdab.luigi.domain.Pizza;
+import be.vdab.luigi.restclients.FixerKoersClient;
+import be.vdab.luigi.restclients.KoersClient;
+import be.vdab.luigi.services.DefaultEuroService;
 import be.vdab.luigi.services.EuroService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
