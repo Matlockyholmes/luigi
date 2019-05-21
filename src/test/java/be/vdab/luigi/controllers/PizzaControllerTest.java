@@ -2,7 +2,6 @@ package be.vdab.luigi.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import be.vdab.luigi.PizzaController;
 import be.vdab.luigi.domain.Pizza;
 import be.vdab.luigi.services.EuroService;
 import org.junit.Before;

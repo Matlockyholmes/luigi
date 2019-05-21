@@ -1,4 +1,4 @@
-package be.vdab.luigi;
+package be.vdab.luigi.controllers;
 
 import be.vdab.luigi.domain.Adres;
 import be.vdab.luigi.domain.Persoon;
