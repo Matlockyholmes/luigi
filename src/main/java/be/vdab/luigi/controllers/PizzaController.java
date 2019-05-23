@@ -1,5 +1,6 @@
 package be.vdab.luigi.controllers;
 
+import be.vdab.luigi.forms.VanTotPrijsForm;
 import be.vdab.luigi.services.EuroService;
 import be.vdab.luigi.services.PizzaService;
 import org.springframework.stereotype.Controller;
@@ -41,5 +42,9 @@ public class PizzaController {
     @GetMapping("prijzen/{prijs}")
     public ModelAndView pizzasMetEenPrijs(@PathVariable BigDecimal prijs){
         return new ModelAndView("prijzen","pizzas",pizzaService.findByPrijs(prijs)).addObject("prijzen");
+    }
+    @GetMapping("vantotprijs/form")
+    public ModelAndView vanTotPrijsForm(){
+        return new ModelAndView("vantotprijs").addObject(new VanTotPrijsForm(BigDecimal.ONE, BigDecimal.TEN));
     }
 }
