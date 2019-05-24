@@ -5,9 +5,12 @@
 <nav th:replace="fragments::menu"></nav>
 <h1>Van tot prijs</h1>
 <form th:object="${vanTotPrijsForm}" method="get" th:action="@{/pizzas/vantotprijs}">
-    <label>Van:<input th:field="*{van}" autofocus></label>
-    <label>Tot:<input th:field="*{tot}"></label>
+    <label>Van:<span th:errors="*{van}"></span></span><input th:field="*{van}" autofocus></label>
+    <label>Tot:<span th:errors="*{tot}"></span><input th:field="*{tot}"></label>
     <input type="submit" value="Zoeken">
 </form>
+<ul th:if="${pizzas} != null">
+    <li th:each="pizza:${pizzas}" th:object="${pizza}" th:text="|*{naam} &euro; *{prijs}|"></li>
+</ul>
 </body>
 </html>
