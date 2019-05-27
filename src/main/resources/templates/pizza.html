@@ -12,9 +12,9 @@
         <dt>Nummer</dt>
         <dd th:text="*{id}"></dd>
         <dt>Prijs</dt>
-        <dd th:text="|*{prijs} &euro;|"></dd>
+        <dd th:text="|*{{prijs}} &euro;|"></dd>
         <dt>In dollar</dt>
-        <dd th:text="|${inDollar} &dollar;|"></dd>
+        <dd th:text="|${#numbers.formatDecimal(inDollar,1,2)} &dollar;|"></dd>
         <dt>Pikant</dt>
         <dd th:text="*{pikant} ? 'Ja' : 'Nee'"></dd>
     </dl>
