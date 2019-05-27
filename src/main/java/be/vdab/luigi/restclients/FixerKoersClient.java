@@ -3,19 +3,22 @@ package be.vdab.luigi.restclients;
 import be.vdab.luigi.exception.KoersClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Scanner;
 
+@Component
 @Order(1)
 public class FixerKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final URL url;
 
-    FixerKoersClient(URL url) {
+    FixerKoersClient(@Value("${fixerKoersURL}") URL url) {
         this.url = url;
     }
 

@@ -3,7 +3,9 @@ package be.vdab.luigi.restclients;
 import be.vdab.luigi.exception.KoersClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -14,11 +16,12 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 
+@Component
 @Order(2)
 public class ECBKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final URL url;
-    public ECBKoersClient(URL url){
+    public ECBKoersClient(@Value("${ecbKoersURL}") URL url){
         this.url = url;
     }
     @Override
